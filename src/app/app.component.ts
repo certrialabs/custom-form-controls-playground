@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'custom-form-controls';
+  formHash = {
+    personalInfo: {
+      firstName: 'Kiril',
+      lastName: 'Kalchev'
+    }
+  };
+
+  onSubmit(event) {
+    console.log("Form submitted");
+    console.log(this.formHash);
+  }
 }
