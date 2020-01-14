@@ -1,8 +1,8 @@
-import { Component, OnInit, ElementRef, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, DefaultValueAccessor } from '@angular/forms';
+import { Component, OnInit, ElementRef, forwardRef, Input, HostBinding, ViewEncapsulation, HostListener, ViewChild, ContentChild, AfterViewInit, ViewContainerRef, Injector } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgModel, FormControl, NgControl, DefaultValueAccessor } from '@angular/forms';
 
 @Component({
-  selector: 'app-ds-input, [app-ds-input]',
+  selector: '[app-ds-input]',
   templateUrl: './ds-input.component.html',
   styleUrls: ['./ds-input.component.less'],
   providers: [
@@ -11,33 +11,39 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, DefaultValueAccessor } from '@
       useExisting: forwardRef(() => DsInputComponent),
       multi: true
     }
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class DsInputComponent implements OnInit, ControlValueAccessor {
   isDisabled = false;
-  propagateChange = (_: any) => {};
+  @HostBinding('class.disabled') get disabledGetter(): boolean { return this.isDisabled; };
 
-  constructor(private elRef: DefaultValueAccessor ) {}
+  constructor(private elRef: ElementRef, private injector: Injector) {}
 
-  writeValue(obj: any): void {
-    console.log('Write Value called');
-    this.propagateChange(obj);
+  writeValue(obj: string): void {
+    this.elRef.nativeElement.value = obj;
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    const c = this.injector.get(DefaultValueAccessor);
+    c.registerOnChange(fn);
   }
 
   registerOnTouched(fn: any): void {
-    throw new Error("Method not implemented.");
+    const c = this.injector.get(DefaultValueAccessor);
+    c.registerOnTouched(fn);
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    this.isDisabled = isDisabled;
+    this.disabled = isDisabled;
+  }
+
+  @Input() set disabled(value: boolean) {
+    this.elRef.nativeElement.removeAttribute('disabled');
+    this.isDisabled = value;
   }
 
   ngOnInit() {
-    console.log(this.elRef);
+    console.log(this.injector.get(DefaultValueAccessor));
   }
 }

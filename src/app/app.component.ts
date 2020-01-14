@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
+  isDisabled = false;
+  foo = "Foo";
+
   title = 'custom-form-controls';
   formHash = {
     personalInfo: {
@@ -24,5 +27,13 @@ export class AppComponent {
   onSubmit(event) {
     console.log("Form submitted");
     console.log(this.formHash);
+  }
+
+  onClick(event) {
+    this.isDisabled = !this.isDisabled;
+  }
+
+  onChange(){
+    console.log("On Change Called");
   }
 }
