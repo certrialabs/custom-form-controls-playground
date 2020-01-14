@@ -11,7 +11,14 @@ export class AppComponent {
     personalInfo: {
       firstName: 'Kiril',
       lastName: 'Kalchev'
-    }
+    },
+    ubos: [{
+      firstName: 'UBO1',
+      lastName: 'Company'
+    }, {
+      firstName: 'UBO2',
+      lastName: 'Company'
+    }]
   };
 
   onSubmit(event) {

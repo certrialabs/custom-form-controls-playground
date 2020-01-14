@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgModel, NgForm } from '@angular/forms';
+import { DH_CHECK_P_NOT_SAFE_PRIME } from 'constants';
 
 class ValueClass {
   firstName: string;
@@ -29,10 +30,9 @@ export class DsPersonalInfoComponent implements OnInit, ControlValueAccessor {
   propagateChange = (_: any) => {};
   onTouchedChange = (_: any) => {};
 
-  constructor(private elRef: ElementRef) {}
+  constructor(private elRef: ElementRef, private parent: NgForm) {}
 
   ngOnInit() {
-    console.log(this.elRef);
   }
 
   writeValue(obj: ValueClass): void {
