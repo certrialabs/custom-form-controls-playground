@@ -18,6 +18,8 @@ export class AppComponent {
     }, {
       firstName: 'UBO2',
       lastName: 'Company'
+    }],
+    contacts: [{
     }]
   };
 

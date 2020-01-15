@@ -1,11 +1,17 @@
 <form (submit)="onSubmit($event)" #demoForm="ngForm">
-  <app-ds-personal-info name='personal-info' [(ngModel)]='formHash.personalInfo' #addNew='ngModel'></app-ds-personal-info>
+  <app-ds-personal-info name='personal-info' [(ngModel)]='formHash.personalInfo'></app-ds-personal-info>
   <hr>
   <div style="  border-style: solid; border-width: medium;">
     <div *ngFor='let item of formHash.ubos; let i = index'>
       <app-ds-personal-info [name]="'ubo-personal-info' + i" [(ngModel)]='item'></app-ds-personal-info>
     </div>
     <app-ds-section-button [items]='formHash.ubos'></app-ds-section-button>
+  </div>
+  <div style="  border-style: solid; border-width: medium;">
+    <div *ngFor='let item of formHash.contacts; let i = index'>
+      <app-ds-personal-info [name]="'ubo-contact-info' + i" [(ngModel)]='item'></app-ds-personal-info>
+    </div>
+    <app-ds-section-button [items]='formHash.contacts'></app-ds-section-button>
   </div>
   <button type='submit'> Submit </button>
 </form>

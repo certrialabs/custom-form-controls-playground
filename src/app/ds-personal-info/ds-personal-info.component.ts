@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgModel, NgForm } from '@angular/forms';
-import { DH_CHECK_P_NOT_SAFE_PRIME } from 'constants';
 
 class ValueClass {
   firstName: string;
